@@ -1,0 +1,8 @@
+h2 {background-color: black; color: white;}
+table {
+    caption-side: bottom;
+    border: 1px solid #222;
+    border-collapse: collapse;
+    width: 80%;
+}
+th {background-color: darkgreen;color: azure;}
