@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>가위바위보 게임</title>
+<link rel="stylesheet" href="game.css" />
+</head>
+<body>
+
+<h1>가위바위보 게임 ✌✊✋</h1>
+<p class="info">키패드 입력: 1 = 가위 / 2 = 바위 / 3 = 보</p>
+
+<div class="board">
+    <div class="result-box" id="player">당신: -</div>
+    <div class="result-box" id="computer">컴퓨터: -</div>
+    <div class="result-box" id="final">결과: -</div>
+
+    <div class="scoreboard">
+        <div id="wins">승: 0</div>
+        <div id="losses">패: 0</div>
+        <div id="draws">무승부: 0</div>
+    </div>
+</div>
+
+<script>
+    let winCount = 0;
+    let loseCount = 0;
+    let drawCount = 0;
+
+    function convert(num) {
+        if (num === 1) return "가위 ✌";
+        if (num === 2) return "바위 ✊";
+        if (num === 3) return "보 ✋";
+    }
+
+    document.addEventListener("keydown", function(event) {
+        const key = Number(event.key);
+        if (![1,2,3].includes(key)) return;
+
+        const playerChoice = key;
+        document.getElementById("player").innerText = "당신: " + convert(playerChoice);
+
+        const computerChoice = Math.floor(Math.random() * 3) + 1;
+        document.getElementById("computer").innerText = "컴퓨터: " + convert(computerChoice);
+
+        let result = "";
+        if (playerChoice === computerChoice) {
+            result = "무승부!";
+            drawCount++;
+        } else if (
+            (playerChoice === 1 && computerChoice === 3) ||
+            (playerChoice === 2 && computerChoice === 1) ||
+            (playerChoice === 3 && computerChoice === 2)
+        ) {
+            result = "당신의 승리!";
+            winCount++;
+        } else {
+            result = "컴퓨터 승리!";
+            loseCount++;
+        }
+
+        document.getElementById("final").innerText = "결과: " + result;
+        document.getElementById("wins").innerText = "승: " + winCount;
+        document.getElementById("losses").innerText = "패: " + loseCount;
+        document.getElementById("draws").innerText = "무승부: " + drawCount;
+    });
+</script>
+
+</body>
+</html>
